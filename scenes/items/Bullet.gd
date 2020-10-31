@@ -2,6 +2,7 @@ class_name Bullet
 extends KinematicBody
 
 var speed = 100
+var bullet_damage
 
 func _ready():
 	print("Bullet spawned")
