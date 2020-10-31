@@ -19,9 +19,8 @@ signal item_change
 
 
 func set_item():
+	pass
 	
-	
-
 
 
 func _ready():
