@@ -17,7 +17,7 @@ shape = SubResource( 1 )
 [node name="Head" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0964553, 0.264633, 0.0323504 )
 current = true
-fov = 100.1
+fov = 60.3
 
 [node name="current_item" parent="Head" instance=ExtResource( 2 )]
-transform = Transform( 0.497, 0, 0, 0, 0.0150865, -0.6487, 0, 0.495771, 0.0197402, 0.559779, -0.396352, -2.79249 )
+transform = Transform( 0.3, 0, 0, 0, 0.00912489, -0.299861, 0, 0.299861, 0.00912489, 2.76594, -1.49701, -6.19168 )

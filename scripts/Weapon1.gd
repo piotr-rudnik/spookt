@@ -2,7 +2,7 @@ class_name Weapon1
 extends Item
 
 func _init():
-	model = load("res://models/items/weapon1.glb")
+	model = load("res://scenes/pizza.tscn")
 	bullet = load("res://scenes/items/Bullet.tscn")
 	item_name = "Weapon1"
 

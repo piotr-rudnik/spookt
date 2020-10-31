@@ -8,7 +8,6 @@ var gravity = 9.8
 var vspeed = 0
 
 var hp = 100
-
 var walk_target = null
 var walk_path = null
 var path_point = 0
