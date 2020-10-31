@@ -15,14 +15,27 @@ var target_position = null
 
 var current_attack = null
 
+var is_hurt = false
+var dead = false
+
 export(String) var walk_animation = "walk"
 export(String) var idle_animation = "idle"
-export(String) var hurt_animation = "hurt"
+export(Array) var hurt_animations = ["hurt"]
+export(String) var die_animation = "die"
 var attacks = []
 
 func take_damage(damage):
-	hp -= damage
-	get_node("Mesh/AnimationPlayer").play(hurt_animation)
+	if not dead:
+		hp -= damage
+		hurt_animations.shuffle()
+		if hp > 0:
+			get_node("Mesh/AnimationPlayer").play(hurt_animations[0])
+			is_hurt = true
+		else:
+			get_node("Mesh/AnimationPlayer").play(die_animation)
+			dead = true
+			$CollisionShapeDead.disabled = false
+			$CollisionShape.disabled = true
 
 func on_attack_timer():
 	if current_attack["action"]:
@@ -54,39 +67,43 @@ func find_target():
 
 func anim_end(what):
 	current_attack = null
+	is_hurt = false
 
 func _physics_process(delta):
-	$RayCast.cast_to = look_target.global_transform.origin - $RayCast.global_transform.origin
-	$RayCast.force_raycast_update()
-	var target_body = $RayCast.get_collider()
-	if target_body and target_body.name == "Player":
-		target_position = target_body.global_transform.origin
 	vspeed -= gravity * delta
-	if walk_path:
-		if get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) < (0.4*0.4):
-			if path_point < len(walk_path)-1:
-				path_point += 1
-		walk_target = walk_path[path_point]
 	var movement_vector = Vector3(0,vspeed,0)
-	if not current_attack:
+	
+	if not dead:
+		$RayCast.cast_to = look_target.global_transform.origin - $RayCast.global_transform.origin
+		$RayCast.force_raycast_update()
+		var target_body = $RayCast.get_collider()
 		if target_body and target_body.name == "Player":
-			var target_dist_sqr = global_transform.origin.distance_squared_to($RayCast.get_collision_point())
-			for attack in attacks:
-				if attack["min_range"]*attack["min_range"] >= target_dist_sqr:
-					current_attack = attack
-					$AttackTimer.wait_time = attack["time"]
-					$AttackTimer.start()
-					break
-	if current_attack:
-		get_node("Mesh/AnimationPlayer").play(current_attack["anim"])
-		get_node("DirectionPointer").look_at(target_body.global_transform.origin,Vector3(0,1,0))
-		get_node("DirectionPointer").rotation_degrees.y += 180
-	elif get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) > (0.3*0.3):
-		movement_vector = (walk_target - global_transform.origin).normalized()
-		get_node("DirectionPointer").look_at(global_transform.origin - movement_vector * Vector3(1,0,1),Vector3(0,1,0))
-		get_node("Mesh/AnimationPlayer").play(walk_animation)
-	else:
-		get_node("Mesh/AnimationPlayer").play(idle_animation)
+			target_position = target_body.global_transform.origin
+		if walk_path:
+			if get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) < (0.4*0.4):
+				if path_point < len(walk_path)-1:
+					path_point += 1
+			walk_target = walk_path[path_point]
+		if not is_hurt:
+			if not current_attack:
+				if target_body and target_body.name == "Player":
+					var target_dist_sqr = global_transform.origin.distance_squared_to($RayCast.get_collision_point())
+					for attack in attacks:
+						if attack["min_range"]*attack["min_range"] >= target_dist_sqr:
+							current_attack = attack
+							$AttackTimer.wait_time = attack["time"]
+							$AttackTimer.start()
+							break
+			if current_attack:
+				get_node("Mesh/AnimationPlayer").play(current_attack["anim"])
+				get_node("DirectionPointer").look_at(target_body.global_transform.origin,Vector3(0,1,0))
+				get_node("DirectionPointer").rotation_degrees.y += 180
+			elif get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) > (0.3*0.3):
+				movement_vector = (walk_target - global_transform.origin).normalized()
+				get_node("DirectionPointer").look_at(global_transform.origin - movement_vector * Vector3(1,0,1),Vector3(0,1,0))
+				get_node("Mesh/AnimationPlayer").play(walk_animation)
+			else:
+				get_node("Mesh/AnimationPlayer").play(idle_animation)
 	move_and_slide(movement_vector * movement_speed + Vector3(0,vspeed,0),Vector3(0,1,0),true)
 	if is_on_floor():
 		vspeed = 0
