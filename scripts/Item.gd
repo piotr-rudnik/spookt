@@ -7,8 +7,11 @@ var bullet
 
 func use():
 	var bullet_instance = bullet.instance()
-	bullet_instance.transform.origin = transform.origin
+	print(bullet_instance.transform.origin)
 	get_viewport().add_child(bullet_instance)
+	bullet_instance.global_transform = global_transform
+
+
 
 func _ready():
 	pass # Replace with function body.

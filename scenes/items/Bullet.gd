@@ -6,5 +6,7 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	var movement = Vector3(1,0,0)
+	
+	var movement = global_transform.origin - to_global(Vector3(0,0,1) * 100)
 	move_and_slide(movement, Vector3.UP)
+	#print("dfg")
