@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/furry.glb-8dbb5ba56fb0f75d4998997cf22bc0ab.scn"
+path="res://.import/flats.glb-3417404500cee3dc5f3f7e5ddd4d7804.scn"
 
 [deps]
 
-source_file="res://models/furry.glb"
-dest_files=[ "res://.import/furry.glb-8dbb5ba56fb0f75d4998997cf22bc0ab.scn" ]
+source_file="res://models/map1/flats.glb"
+dest_files=[ "res://.import/flats.glb-3417404500cee3dc5f3f7e5ddd4d7804.scn" ]
 
 [params]
 
