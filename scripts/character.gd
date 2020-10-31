@@ -17,6 +17,7 @@ var weapons = []
 signal item_change
 signal player_hp_change
 
+
 onready var current_item = get_node("Head/current_item")
 
 func take_damage(damage):
@@ -70,12 +71,20 @@ func _input(event):
 		$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
 		#$Head.rotation_degrees.y = clamp($Head.rotation_degrees.y - event.relative.y * mouse_sensitivity / 10, -90, 90)
 
+var can_change_weapon = true
+
 func _physics_process(delta):
 	######################################
 	## Action keys
 	######################################
 	if Input.is_action_pressed("ui_weapon_change"):
-		change_weapon_next()
+		if can_change_weapon:
+			change_weapon_next()
+			can_change_weapon = false
+	
+	if !Input.is_action_pressed("ui_weapon_change"):
+		can_change_weapon = true
+		
 
 	if Input.is_action_pressed("ui_shoot"):
 		current_item.use()
