@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Item.gd"
 }, {
-"base": "KinematicBody",
-"class": "NPCBase",
-"language": "GDScript",
-"path": "res://scripts/NPCBase.gd"
-}, {
 "base": "Item",
 "class": "Weapon1",
 "language": "GDScript",
@@ -37,7 +32,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "Item": "",
-"NPCBase": "",
 "Weapon1": "",
 "Weapon2": ""
 }
@@ -47,11 +41,6 @@ _global_script_class_icons={
 config/name="Spookt"
 run/main_scene="res://scenes/main_scene.tscn"
 config/icon="res://icon.png"
-
-[display]
-
-window/size/width=1600
-window/size/height=900
 
 [input]
 
