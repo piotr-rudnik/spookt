@@ -1,6 +1,6 @@
 extends KinematicBody
 
-var speed = 8
+var speed = 24
 var ground_acceleration = 8
 var air_acceleration = 2
 var acceleration = ground_acceleration
