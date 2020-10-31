@@ -51,7 +51,6 @@ func set_current_item(item):
 	$Head.add_child(current_item)
 	print("Event item_change")
 	emit_signal("item_change", item.item_name)
-	
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -67,9 +66,9 @@ func _input(event):
 	######################################
 	if Input.is_action_pressed("ui_weapon_change"):
 		change_weapon_next()
-		
+
 	if Input.is_action_pressed("ui_shoot"):
-		current_time.use()
+		current_item.use()
 
 	######################################
 	## Mouse input
@@ -126,5 +125,3 @@ func _physics_process(delta):
 	#print("Move")
 	#print(movement)
 	move_and_slide(movement, Vector3.UP)
-	
-

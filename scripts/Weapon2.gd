@@ -3,6 +3,7 @@ extends Item
 
 func _init():
 	model = load("res://models/items/weapon2.glb")
+	bullet = load("res://scenes/items/Bullet.tscn")
 	item_name = "Weapon2"
 
 func _ready():
