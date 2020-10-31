@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Spookt"
-run/main_scene="res://scenes/main_scene.tscn"
+run/main_scene="res://scenes/TestScene.tscn"
 config/icon="res://icon.png"
 
 [input]
