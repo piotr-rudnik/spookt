@@ -7,6 +7,8 @@ var movement_speed = 6
 var gravity = 9.8
 var vspeed = 0
 
+var hp = 100
+
 var walk_target = null
 var walk_path = null
 var path_point = 0
@@ -16,7 +18,12 @@ var current_attack = null
 
 export(String) var walk_animation = "walk"
 export(String) var idle_animation = "idle"
+export(String) var hurt_animation = "hurt"
 var attacks = []
+
+func take_damage(damage):
+	hp -= damage
+	get_node("Mesh/AnimationPlayer").play(hurt_animation)
 
 func on_attack_timer():
 	if current_attack["action"]:

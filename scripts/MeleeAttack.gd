@@ -9,7 +9,6 @@ func _physics_process(delta):
 		if not (body in bodies_collided):
 			if body.has_method("take_damage"):
 				body.call("take_damage",damage)
-			print(body.name)
 			bodies_collided.append(body)
 
 func destroy():
