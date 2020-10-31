@@ -20,13 +20,16 @@ var current_item
 
 signal item_change
 
-func set_current_item(item):
-	print("Setting new item " + item.to_string())
-	var origin = $Head.get_node("current_item").transform.origin
-	item.transform.origin = origin
-	$Head.get_node("current_item").replace_by(item)
+func set_current_item(new_item):
+	
+	print("Dupa")
+	var current_item = $Head.current_item
+	print("Current item " + current_item.to_string())
+	print("Setting new item " + new_item.to_string())
+	new_item.transform = current_item.transform
+	current_item.replace_by(new_item)
 	print("Event item_change")
-	emit_signal("item_change", item.item_name)
+	emit_signal("item_change", new_item.item_name)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
