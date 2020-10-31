@@ -6,4 +6,5 @@ func _init():
 	item_name = "Weapon2"
 
 func _ready():
-	pass
+	var mesh_instance = model.instance()
+	add_child(mesh_instance)

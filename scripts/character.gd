@@ -16,26 +16,49 @@ var gravity_vec = Vector3()
 var grounded = true
 
 var inventory = []
-#var current_item
+var weapons = []
 
 signal item_change
 
 onready var current_item = get_node("Head/current_item")
 
+func change_weapon_next():
+	set_current_item(_get_next_weapon())
+
+func _get_next_weapon():
+	var current_weapon_index = weapons.find(current_item)	
+	
+	if current_weapon_index + 1 == weapons.size():
+		return weapons[0]
+	
+	return weapons[current_weapon_index + 1]
+"""
 func set_current_item(item):
 	print("Setting new item " + item.to_string())
 	var origin = current_item.transform.origin
 	item.transform.origin = origin
 	current_item.replace_by(item)
 	current_item = item
+	emit_signal("item_change", item.item_name)
+"""	
+	
+func set_current_item(item):
+	print("Setting new item " + item.to_string())
+	var origin = current_item.transform.origin
+	item.transform.origin = origin
+	$Head.remove_child(current_item)
+	current_item = item
+	$Head.add_child(current_item)
 	print("Event item_change")
 	emit_signal("item_change", item.item_name)
+	
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	set_current_item(Weapon1.new())
+	weapons.append(Weapon1.new())
+	weapons.append(Weapon2.new())
+	set_current_item(weapons[0])
 
 func _input(event):
 	
@@ -43,8 +66,11 @@ func _input(event):
 	## Action keys
 	######################################
 	if Input.is_action_pressed("ui_weapon_change"):
-		set_current_item(Weapon1.new())
-	
+		change_weapon_next()
+		
+	if Input.is_action_pressed("ui_shoot"):
+		current_time.use()
+
 	######################################
 	## Mouse input
 	######################################

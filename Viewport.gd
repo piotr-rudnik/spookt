@@ -1,5 +1,6 @@
 extends Viewport
 
+
 func on_size_changed():
 	size = get_tree().get_root().size
 
