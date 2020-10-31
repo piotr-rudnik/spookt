@@ -1,7 +1,7 @@
 extends Camera
 
 var mouse_sensitivity = 0.004
-var movement_speed = 128
+var movement_speed = 10
 
 func _physics_process(delta):
 	var mouse_move = get_viewport().size/2 - get_viewport().get_mouse_position()
@@ -14,4 +14,4 @@ func _physics_process(delta):
 	var move_z = Vector3(0,0,1) * (float(Input.is_action_pressed("ui_down")) - float(Input.is_action_pressed("ui_up")))
 	var move_x = Vector3(1,0,0) * (float(Input.is_action_pressed("ui_right")) - float(Input.is_action_pressed("ui_left")))
 	
-	global_transform.origin = to_global((move_z+move_x) * delta)
+	global_transform.origin = to_global((move_z+move_x) * movement_speed * delta)
