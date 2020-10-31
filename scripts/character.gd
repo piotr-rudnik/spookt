@@ -60,11 +60,9 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity / 10
 		$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
-		#$Head.rotation_degrees.y = clamp($Head.rotation_degrees.y - event.relative.y * mouse_sensitivity / 10, -90, 90)
-
-
 
 func _physics_process(delta):
+	
 	######################################
 	## Action keys
 	######################################
@@ -75,7 +73,6 @@ func _physics_process(delta):
 	
 	if !Input.is_action_pressed("ui_weapon_change"):
 		can_change_weapon = true
-		
 
 	if Input.is_action_pressed("ui_shoot"):
 		current_item.use()
