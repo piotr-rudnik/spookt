@@ -3,8 +3,6 @@
 [ext_resource path="res://scripts/character.gd" type="Script" id=1]
 [ext_resource path="res://models/random1.glb" type="PackedScene" id=2]
 
-
-
 [sub_resource type="CylinderShape" id=1]
 radius = 1.39115
 height = 6.99214
@@ -21,5 +19,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0964553, 0.264633, 0.032350
 current = true
 fov = 100.1
 
-[node name="random1" parent="Head" instance=ExtResource( 2 )]
+[node name="current_item" parent="Head" instance=ExtResource( 2 )]
 transform = Transform( 0.497, 0, 0, 0, 0.0150865, -0.6487, 0, 0.495771, 0.0197402, 0.559779, -0.396352, -2.79249 )

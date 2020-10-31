@@ -15,29 +15,45 @@ var movement = Vector3()
 var gravity_vec = Vector3()
 var grounded = true
 
+var inventory = []
+var current_item
+
 signal item_change
 
-
-func set_item():
-	pass
-	
-
+func set_current_item(item):
+	print("Setting new item " + item.to_string())
+	var origin = $Head.get_node("current_item").transform.origin
+	item.transform.origin = origin
+	$Head.get_node("current_item").replace_by(item)
+	print("Event item_change")
+	emit_signal("item_change", item.item_name)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	set_current_item(Weapon1.new())
 
 func _input(event):
-	emit_signal("item_change")
+	
+	######################################
+	## Action keys
+	######################################
+	if Input.is_action_pressed("ui_weapon_change"):
+		set_current_item(Weapon1.new())
+	
+	######################################
+	## Mouse input
+	######################################
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity / 10
 		$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
 		$Head.rotation_degrees.y = clamp($Head.rotation_degrees.y - event.relative.y * mouse_sensitivity / 10, -90, 90)
-		#print("Mouse rotation")
-		#print(event.to_string())
 
+	######################################
+	## Movement input
+	######################################
 	direction = Vector3()
-	
 	if Input.is_action_pressed("ui_up"):
 		#print("up")
 		direction.z = -speed
@@ -50,9 +66,7 @@ func _input(event):
 	if Input.is_action_pressed("ui_right"):
 		print("right")
 		direction.x = speed
-	
-	#direction.z = -Input.is_action_pressed("ui_up") + Input.is_action_pressed("ui_down")
-	#direction.x = -Input.is_action_pressed("ui_left") + Input.is_action_pressed("ui_right")
+		
 	direction = direction.normalized().rotated(Vector3.UP, rotation.y)
 
 func _physics_process(delta):
