@@ -16,20 +16,20 @@ var gravity_vec = Vector3()
 var grounded = true
 
 var inventory = []
-var current_item
+#var current_item
 
 signal item_change
 
-func set_current_item(new_item):
-	
-	print("Dupa")
-	var current_item = $Head.current_item
-	print("Current item " + current_item.to_string())
-	print("Setting new item " + new_item.to_string())
-	new_item.transform = current_item.transform
-	current_item.replace_by(new_item)
+onready var current_item = get_node("Head/current_item")
+
+func set_current_item(item):
+	print("Setting new item " + item.to_string())
+	var origin = current_item.transform.origin
+	item.transform.origin = origin
+	current_item.replace_by(item)
+	current_item = item
 	print("Event item_change")
-	emit_signal("item_change", new_item.item_name)
+	emit_signal("item_change", item.item_name)
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
