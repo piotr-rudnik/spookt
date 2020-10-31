@@ -8,15 +8,20 @@ var jump = 4.5
 var gravity = 9.8
 var stick_amount = 10
 var mouse_sensitivity = 10
-
+var hp = 100
 var grounded = true
 
 var inventory = []
 var weapons = []
 
 signal item_change
+signal player_hp_change
 
 onready var current_item = get_node("Head/current_item")
+
+func take_damage(damage):
+	hp -= damage
+	emit_signal("player_hp_change", hp)
 
 func change_weapon_next():
 	set_current_item(_get_next_weapon())
