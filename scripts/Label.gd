@@ -16,9 +16,9 @@ func _on_character_hp_change(new_hp):
 	hp = new_hp
 	update_text()
 
-func _on_character_item_change(item_name):
+func _on_character_item_change(new_item_name):
 	print("Item changed")
-	text = item_name
+	item_name = new_item_name
 	update_text()
 
 func update_text():

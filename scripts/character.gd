@@ -17,6 +17,7 @@ var weapons = []
 signal item_change
 signal player_hp_change
 
+var can_change_weapon = true
 
 onready var current_item = get_node("Head/current_item")
 
@@ -34,15 +35,6 @@ func _get_next_weapon():
 		return weapons[0]
 	
 	return weapons[current_weapon_index + 1]
-"""
-func set_current_item(item):
-	print("Setting new item " + item.to_string())
-	var origin = current_item.transform.origin
-	item.transform.origin = origin
-	current_item.replace_by(item)
-	current_item = item
-	emit_signal("item_change", item.item_name)
-"""	
 	
 func set_current_item(item):
 	print("Setting new item " + item.to_string())
@@ -51,7 +43,6 @@ func set_current_item(item):
 	$Head.remove_child(current_item)
 	current_item = item
 	$Head.add_child(current_item)
-	print("Event item_change")
 	emit_signal("item_change", item.item_name)
 
 func _ready():
@@ -71,7 +62,7 @@ func _input(event):
 		$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
 		#$Head.rotation_degrees.y = clamp($Head.rotation_degrees.y - event.relative.y * mouse_sensitivity / 10, -90, 90)
 
-var can_change_weapon = true
+
 
 func _physics_process(delta):
 	######################################
