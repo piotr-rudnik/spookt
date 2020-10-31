@@ -15,8 +15,9 @@ func _ready():
 	on_size_changed()
 	get_tree().get_root().connect("size_changed",self,"on_size_changed")
 
-func _on_character_item_change():
+func _on_character_item_change(item_name):
 	print("Item changed")
+	text = item_name
 	
 	
 func on_size_changed():
