@@ -40,6 +40,7 @@ func set_current_item(item):
 	print("Setting new item " + item.to_string())
 	var origin = current_item.transform.origin
 	item.transform.origin = origin
+	item.scale = Vector3(0.3,0.3,0.3)
 	$Head.remove_child(current_item)
 	current_item = item
 	$Head.add_child(current_item)
