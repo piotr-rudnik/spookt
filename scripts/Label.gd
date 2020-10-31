@@ -2,7 +2,8 @@ extends Label
 
 export(String) var character_path_string
 var character 
-var item_name = "Nice"
+
+var item_name = "Pizza"
 var hp = 100
 
 func _ready():
@@ -17,7 +18,6 @@ func _on_character_hp_change(new_hp):
 	update_text()
 
 func _on_character_item_change(new_item_name):
-	print("Item changed")
 	item_name = new_item_name
 	update_text()
 
