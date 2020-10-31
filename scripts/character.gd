@@ -15,29 +15,38 @@ var movement = Vector3()
 var gravity_vec = Vector3()
 var grounded = true
 
+signal item_change
+
+
+func set_item():
+	
+	
+
+
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-
 func _input(event):
+	emit_signal("item_change")
 	if event is InputEventMouseMotion:
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity / 10
 		$Head.rotation_degrees.x = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
-		$Head.rotation_degrees.y = clamp($Head.rotation_degrees.x - event.relative.y * mouse_sensitivity / 10, -90, 90)
+		$Head.rotation_degrees.y = clamp($Head.rotation_degrees.y - event.relative.y * mouse_sensitivity / 10, -90, 90)
 		#print("Mouse rotation")
 		#print(event.to_string())
 
 	direction = Vector3()
 	
 	if Input.is_action_pressed("ui_up"):
-		print("up")
+		#print("up")
 		direction.z = -speed
 	if Input.is_action_pressed("ui_down"):
-		print("down")
+		#print("down")
 		direction.z = speed
 	if Input.is_action_pressed("ui_left"):
-		print("left")
+		#print("left")
 		direction.x = -speed
 	if Input.is_action_pressed("ui_right"):
 		print("right")
@@ -72,8 +81,8 @@ func _physics_process(delta):
 	movement.x = velocity.x + gravity_vec.x
 	movement.y = gravity_vec.y
 
-	print("Move")
-	print(movement)
+	#print("Move")
+	#print(movement)
 	move_and_slide(movement, Vector3.UP)
 	
 

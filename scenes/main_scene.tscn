@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Label.gd" type="Script" id=1]
+[ext_resource path="res://scenes/character_viewport.tscn" type="PackedScene" id=2]
+
+[node name="main_scene_node" type="Node2D"]
+
+[node name="character_viewport_container" parent="." instance=ExtResource( 2 )]
+
+[node name="current_item_node" type="Label" parent="."]
+margin_left = 819.903
+margin_top = 467.382
+margin_right = 991.902
+margin_bottom = 565.382
+text = "dupa"
+align = 2
+valign = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+character_path_string = "../character_viewport_container/character_viewport/character"

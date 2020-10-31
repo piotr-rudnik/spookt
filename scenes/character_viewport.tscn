@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Viewport.gd" type="Script" id=1]
+[ext_resource path="res://scenes/character.tscn" type="PackedScene" id=2]
+
+[node name="character_viewport_container" type="ViewportContainer"]
+margin_right = 1024.0
+margin_bottom = 599.0
+rect_min_size = Vector2( 7.882, 11.701 )
+focus_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="character_viewport" type="Viewport" parent="."]
+size = Vector2( 1024, 599 )
+handle_input_locally = false
+debug_draw = 3
+render_target_update_mode = 3
+script = ExtResource( 1 )
+
+[node name="character" parent="character_viewport" instance=ExtResource( 2 )]
