@@ -10,7 +10,8 @@ func shoot_reset():
 func _init():
 	model = load("res://scenes/pizza.tscn")
 	bullet = load("res://scenes/items/Bullet.tscn")
-	item_name = "Weapon1"
+	item_name = "Pizza"
+	bullet_damage = 10
 
 func use():
 	if can_shoot:
