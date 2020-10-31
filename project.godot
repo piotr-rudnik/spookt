@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/items/Bullet.gd"
 }, {
-"base": "KinematicBody",
+"base": "Spatial",
 "class": "Item",
 "language": "GDScript",
 "path": "res://scripts/Item.gd"
@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Spookt"
-run/main_scene="res://scenes/main_scene.tscn"
+run/main_scene="res://scenes/TestScene2.tscn"
 config/icon="res://icon.png"
 
 [input]

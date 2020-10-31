@@ -1,5 +1,5 @@
 class_name Item
-extends KinematicBody
+extends Spatial
 
 var item_name
 var model
