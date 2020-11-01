@@ -9,7 +9,9 @@ var gravity = 9.8
 var stick_amount = 10
 var mouse_sensitivity = 10
 var hp = 100
-var grounded = true
+#var grounded = true
+
+var pickup_dist = 6
 
 var inventory = []
 var weapons = []
@@ -51,8 +53,8 @@ func set_current_item(item):
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	weapons.append(Weapon1.new())
-	weapons.append(Weapon2.new())
+	weapons.append(Item.new())
+	#weapons.append(Weapon2.new())
 	set_current_item(weapons[0])
 
 func _input(event):
@@ -69,10 +71,22 @@ func _physics_process(delta):
 	######################################
 	## Action keys
 	######################################
-	if Input.is_action_pressed("ui_weapon_change"):
-		if can_change_weapon:
-			change_weapon_next()
-			can_change_weapon = false
+	$RayCast.cast_to = $RayCast.to_local($Head.to_global(Vector3(0,0,-pickup_dist)))
+	$RayCast.force_raycast_update()
+	var col = $RayCast.get_collider()
+	if col is WeaponPickup:
+		if Input.is_action_just_pressed("ui_pickup"):
+			var wpn = weapons[0]
+			weapons[0] = col.weapon
+			col.remove_child(col.weapon)
+			set_current_item(weapons[0])
+			col.weapon = null
+			col.set_weapon(wpn)
+	
+	#if Input.is_action_pressed("ui_weapon_change"):
+	#	if can_change_weapon:
+	#		change_weapon_next()
+	#		can_change_weapon = false
 	
 	if !Input.is_action_pressed("ui_weapon_change"):
 		can_change_weapon = true

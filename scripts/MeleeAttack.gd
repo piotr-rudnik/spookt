@@ -1,7 +1,7 @@
 extends Area
 
 var bodies_collided = []
-export(float) var damage = 1
+export(float) var damage = 20
 export(float) var time = 1
 
 func _physics_process(delta):
