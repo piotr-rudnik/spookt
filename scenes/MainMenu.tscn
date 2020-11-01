@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://main_menu_background.png" type="Texture" id=1]
+[ext_resource path="res://scenes/MainMenuViewport.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Button
+
+
+func _on_Button_pressed():
+	get_viewport().get_parent().replace_by(load(\"res://scenes/main_scene.tscn\").instance())
+"
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://maneaterbb_reg.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 60
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://maneaterbb_reg.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 30
+font_data = SubResource( 6 )
+
+[node name="ViewportContainer" type="ViewportContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1000, 1000 )
+handle_input_locally = false
+render_direct_to_screen = true
+render_target_update_mode = 3
+script = ExtResource( 2 )
+
+[node name="main_menu_background" type="TextureRect" parent="Viewport"]
+texture = ExtResource( 1 )
+
+[node name="start_button" type="Button" parent="Viewport"]
+margin_left = 81.9324
+margin_top = 346.267
+margin_right = 276.932
+margin_bottom = 408.267
+text = "Start"
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="Viewport"]
+margin_left = 82.084
+margin_top = 80.9075
+margin_right = 351.084
+margin_bottom = 228.907
+custom_fonts/font = SubResource( 3 )
+text = "SPOKT
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="the_game" type="Label" parent="Viewport"]
+margin_left = 90.2772
+margin_top = 150.235
+margin_right = 359.277
+margin_bottom = 298.235
+custom_fonts/font = SubResource( 5 )
+text = "The game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="the_game2" type="Label" parent="Viewport"]
+margin_left = 710.58
+margin_top = 50.1096
+margin_right = 979.58
+margin_bottom = 435.11
+custom_fonts/font = SubResource( 5 )
+text = "Adam sadlik
+
+piotr sadlik
+
+piotr rudnik
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Viewport/start_button" to="Viewport/start_button" method="_on_Button_pressed"]
