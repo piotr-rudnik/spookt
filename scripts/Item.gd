@@ -25,11 +25,10 @@ func use():
 
 func _ready():
 	shot_timer = Timer.new()
-	shot_timer.wait_time = 0.2
+	shot_timer.wait_time = shooting_speed
 	shot_timer.one_shot = false
 	add_child(shot_timer)
 	shot_timer.connect("timeout",self,"shoot_reset")
 
 	var mesh_instance = model.instance()
 	add_child(mesh_instance)
-
