@@ -2,17 +2,12 @@ class_name Bullet
 extends KinematicBody
 
 var speed = 1000
-var bullet_damage = 1
-
-func _ready():
-	print("Bullet spawned")
-	pass
+var bullet_damage = 10
 
 func _physics_process(delta):
 	
 	var movement = global_transform.origin - to_global(Vector3(0,0,1) * speed)
 	move_and_slide(movement, Vector3.UP)
-	#print("dfg")
 	
 	for i in get_slide_count():
 		var col = get_slide_collision(i)
