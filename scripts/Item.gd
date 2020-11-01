@@ -31,7 +31,8 @@ var actions = [
 
 var models = [
 	["Pizza",load("res://scenes/pizza.tscn")],
-	["Skorpion",load("res://scenes/skorpion.tscn")]
+	["Skorpion",load("res://scenes/skorpion.tscn")],
+	["Flintlock",load("res://scenes/flintlock.tscn")]
 ]
 
 var shot_timer = null

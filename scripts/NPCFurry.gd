@@ -3,6 +3,8 @@ extends NPCBase
 var attack_scene = preload("res://scenes/FurryAttack.tscn")
 
 func _ready():
+	movement_speed = 8
+	
 	hp = 100
 	$RayCast.transform.origin.y = 1
 	hurt_animations = ["hurt1","hurt2"]
