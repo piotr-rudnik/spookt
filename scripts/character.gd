@@ -19,6 +19,8 @@ signal player_hp_change
 
 var can_change_weapon = true
 
+var vspeed = 0
+
 onready var current_item = get_node("Head/current_item")
 
 func take_damage(damage):
@@ -78,6 +80,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_shoot"):
 		current_item.use()
 	
+	vspeed -= gravity * delta
 	######################################
 	## Movement input
 	######################################
@@ -86,4 +89,6 @@ func _physics_process(delta):
 		0,
 		float(Input.is_action_pressed("ui_down")) - float(Input.is_action_pressed("ui_up"))
 		).normalized() * speed
-	move_and_slide(movement_vector.rotated(Vector3(0,1,0),rotation.y),Vector3(0,1,0))
+	move_and_slide(movement_vector.rotated(Vector3(0,1,0),rotation.y) + Vector3(0,vspeed,0),Vector3(0,1,0))
+	if is_on_floor():
+		vspeed = 0

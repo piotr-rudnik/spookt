@@ -6,7 +6,7 @@ var bullet_damage = 1
 
 func _ready():
 	print("Bullet spawned")
-	pass
+	add_collision_exception_with(get_node("../Player"))
 
 func _physics_process(delta):
 	

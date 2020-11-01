@@ -16,3 +16,7 @@ autostart = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="IdleSoundTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true

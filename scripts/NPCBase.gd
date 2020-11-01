@@ -18,11 +18,19 @@ var current_attack = null
 var is_hurt = false
 var dead = false
 
+var sees_player = false
+
 export(String) var walk_animation = "walk"
 export(String) var idle_animation = "idle"
 export(Array) var hurt_animations = ["hurt"]
 export(String) var die_animation = "die"
 var attacks = []
+
+func play_idle_sound():
+	if not dead:
+		if not sees_player:
+			$IdleSoundPlayer.play()
+		$IdleSoundTimer.wait_time = 10 + randf()*10.0
 
 func take_damage(damage):
 	if not dead:
@@ -42,7 +50,7 @@ func on_attack_timer():
 		call(current_attack["action"])
 
 func _ready():
-	walk_target = global_transform.origin
+	walk_target = to_global(Vector3(0,0,0.1))#global_transform.origin
 	if look_target_path:
 		look_target = get_node(look_target_path)
 	#$RayCast.add_exception(self)
@@ -51,6 +59,8 @@ func _ready():
 	get_node("Mesh/AnimationPlayer").connect("animation_finished",self,"anim_end")
 	target_position = global_transform.origin
 	find_target()
+	
+	$IdleSoundTimer.connect("timeout",self,"play_idle_sound")
 
 func find_target():
 	if look_target:
@@ -87,6 +97,7 @@ func _physics_process(delta):
 		if not is_hurt:
 			if not current_attack:
 				if target_body and target_body.name == "Player":
+					sees_player = true
 					var target_dist_sqr = global_transform.origin.distance_squared_to($RayCast.get_collision_point())
 					for attack in attacks:
 						if attack["min_range"]*attack["min_range"] >= target_dist_sqr:
@@ -94,6 +105,8 @@ func _physics_process(delta):
 							$AttackTimer.wait_time = attack["time"]
 							$AttackTimer.start()
 							break
+				else:
+					sees_player = false
 			if current_attack:
 				get_node("Mesh/AnimationPlayer").play(current_attack["anim"])
 				get_node("DirectionPointer").look_at(target_body.global_transform.origin,Vector3(0,1,0))
