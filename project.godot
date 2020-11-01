@@ -45,13 +45,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Spookt"
-run/main_scene="res://scenes/TestScene2.tscn"
+run/main_scene="res://scenes/main_scene.tscn"
 config/icon="res://icon.png"
-
-[display]
-
-window/size/width=1600
-window/size/height=900
 
 [input]
 
