@@ -12,6 +12,7 @@ func _ready():
 	character.connect("player_hp_change", self, "_on_character_hp_change")
 	on_size_changed()
 	get_tree().get_root().connect("size_changed",self,"on_size_changed")
+	update_text()
 
 func _on_character_hp_change(new_hp):
 	hp = new_hp

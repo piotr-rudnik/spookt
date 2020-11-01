@@ -40,4 +40,3 @@ func _ready():
 
 	var mesh_instance = model.instance()
 	add_child(mesh_instance)
-
