@@ -1,7 +1,7 @@
 class_name Bullet
 extends KinematicBody
 
-var speed = 100
+var speed = 1000
 var bullet_damage = 1
 
 func _ready():
