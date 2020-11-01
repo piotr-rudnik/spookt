@@ -4,6 +4,10 @@ extends KinematicBody
 var speed = 1000
 var bullet_damage = 10
 
+func _ready():
+	print("Bullet spawned")
+	add_collision_exception_with(get_node("../Player"))
+
 func _physics_process(delta):
 	
 	var movement = global_transform.origin - to_global(Vector3(0,0,1) * speed)
