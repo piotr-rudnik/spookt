@@ -1,5 +1,7 @@
 extends KinematicBody
 
+var has_key = false
+
 var speed = 24
 var ground_acceleration = 8
 var air_acceleration = 2
@@ -74,14 +76,21 @@ func _physics_process(delta):
 	$RayCast.cast_to = $RayCast.to_local($Head.to_global(Vector3(0,0,-pickup_dist)))
 	$RayCast.force_raycast_update()
 	var col = $RayCast.get_collider()
-	if col is WeaponPickup:
+	if col is WeaponPickup or col is NextLevelKey:
+		get_node("../../../PickupLabel").text = "press 'F' to pick up"
 		if Input.is_action_just_pressed("ui_pickup"):
-			var wpn = weapons[0]
-			weapons[0] = col.weapon
-			col.remove_child(col.weapon)
-			set_current_item(weapons[0])
-			col.weapon = null
-			col.set_weapon(wpn)
+			if col is WeaponPickup:
+				print("DICK")
+				var wpn = weapons[0]
+				weapons[0] = col.weapon
+				col.remove_child(col.weapon)
+				set_current_item(weapons[0])
+				col.weapon = null
+				col.set_weapon(wpn)
+			else:
+				get_node("../../../PickupLabel").text = ""
+				col.queue_free()
+				has_key = true
 	
 	#if Input.is_action_pressed("ui_weapon_change"):
 	#	if can_change_weapon:

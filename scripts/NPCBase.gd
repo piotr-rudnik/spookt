@@ -66,9 +66,9 @@ func find_target():
 	if look_target:
 		#walk_target = target_body.global_transform.origin
 		#walk_target = get_node("../Navigation").get_closest_point(target_body.global_transform.origin)
-		var me_point = get_node("../Navigation").get_closest_point(global_transform.origin)
-		var you_point = get_node("../Navigation").get_closest_point(target_position)
-		walk_path = get_node("../Navigation").get_simple_path(me_point,you_point)
+		var me_point = get_node("..").get_closest_point(global_transform.origin)
+		var you_point = get_node("..").get_closest_point(target_position)
+		walk_path = get_node("..").get_simple_path(me_point,you_point)
 		#print(walk_path)
 		path_point = 1
 		if walk_path:
@@ -90,7 +90,7 @@ func _physics_process(delta):
 		if target_body and target_body.name == "Player":
 			target_position = target_body.global_transform.origin
 		if walk_path:
-			if get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) < (0.4*0.4):
+			if get_node("..").get_closest_point(global_transform.origin).distance_squared_to(walk_target) < (0.4*0.4):
 				if path_point < len(walk_path)-1:
 					path_point += 1
 			walk_target = walk_path[path_point]
@@ -111,7 +111,7 @@ func _physics_process(delta):
 				get_node("Mesh/AnimationPlayer").play(current_attack["anim"])
 				get_node("DirectionPointer").look_at(target_body.global_transform.origin,Vector3(0,1,0))
 				get_node("DirectionPointer").rotation_degrees.y += 180
-			elif get_node("../Navigation").get_closest_point(global_transform.origin).distance_squared_to(walk_target) > (0.3*0.3):
+			elif get_node("..").get_closest_point(global_transform.origin).distance_squared_to(walk_target) > (0.3*0.3):
 				movement_vector = (walk_target - global_transform.origin).normalized()
 				get_node("DirectionPointer").look_at(global_transform.origin - movement_vector * Vector3(1,0,1),Vector3(0,1,0))
 				get_node("Mesh/AnimationPlayer").play(walk_animation)

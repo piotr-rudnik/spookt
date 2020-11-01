@@ -20,3 +20,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 character_path_string = "../character_viewport_container/character_viewport/Player"
+
+[node name="PickupLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

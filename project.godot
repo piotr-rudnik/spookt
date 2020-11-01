@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scenes/items/Bullet.gd"
 }, {
 "base": "Spatial",
+"class": "EnemySpawn",
+"language": "GDScript",
+"path": "res://scripts/SpawnEnemy.gd"
+}, {
+"base": "Spatial",
 "class": "Item",
 "language": "GDScript",
 "path": "res://scripts/Item.gd"
@@ -24,10 +29,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/NPCBase.gd"
 }, {
-"base": "NPCBase",
-"class": "PiesPajak",
+"base": "StaticBody",
+"class": "NextLevelKey",
 "language": "GDScript",
-"path": "res://scripts/NPCFurry.gd"
+"path": "res://scripts/NextLevelKey.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "SoundPlayer",
+"language": "GDScript",
+"path": "res://scripts/SoundPlayer.gd"
+}, {
+"base": "KinematicBody",
+"class": "Spit",
+"language": "GDScript",
+"path": "res://scripts/Spit.gd"
 }, {
 "base": "Item",
 "class": "Weapon1",
@@ -46,9 +61,12 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"EnemySpawn": "",
 "Item": "",
 "NPCBase": "",
-"PiesPajak": "",
+"NextLevelKey": "",
+"SoundPlayer": "",
+"Spit": "",
 "Weapon1": "",
 "Weapon2": "",
 "WeaponPickup": ""
@@ -94,6 +112,11 @@ ui_weapon_change={
 ui_shoot={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+ui_pickup={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
  ]
 }
 

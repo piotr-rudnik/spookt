@@ -25,4 +25,4 @@ func generate():
 
 func _ready():
 	generate()
-	add_collision_exception_with(get_node("../Player"))
+	add_collision_exception_with(get_node("../../Player"))

@@ -18,12 +18,12 @@ font_path = "res://maneaterbb_reg.ttf"
 size = 60
 font_data = SubResource( 2 )
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=4]
 font_path = "res://maneaterbb_reg.ttf"
 
 [sub_resource type="DynamicFont" id=5]
 size = 30
-font_data = SubResource( 6 )
+font_data = SubResource( 4 )
 
 [node name="ViewportContainer" type="ViewportContainer"]
 __meta__ = {

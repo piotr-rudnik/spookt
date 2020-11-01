@@ -22,11 +22,20 @@ func spawn_bullet(speed,damage):
 func play_sound():
 	sound_player.play()
 
+func heal(n):
+	var inst = SoundPlayer.new()
+	inst.stream = load("res://sound/eat_.wav")
+	get_parent().add_child(inst.stream)
+	get_node("../../Player").hp += n
+	get_node("../../Player").emit_signal("player_hp_change",get_node("../../Player").hp)
+	queue_free()
+
 var ammo = 0
 
 var actions = [
 	[0.2, "spawn_bullet", [250,10], 30, load("res://sound/gune.wav")],
 	[1, "play_sound", [], 16000, load("res://sound/horn.wav")],
+	[1, "heal", [10], load("res://sound/eat_.wav")]
 ]
 
 var models = [
