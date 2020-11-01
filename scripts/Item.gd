@@ -28,7 +28,7 @@ func heal(n):
 	get_parent().add_child(inst)
 	#get_node("../..").hp += n
 	#get_node("../..").emit_signal("player_hp_change",get_node("../../Player").hp)
-	queue_free()
+	#queue_free()
 
 var ammo = 0
 

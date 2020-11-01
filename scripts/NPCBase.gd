@@ -46,8 +46,9 @@ func take_damage(damage):
 			$CollisionShape.disabled = true
 
 func on_attack_timer():
-	if current_attack["action"]:
-		call(current_attack["action"])
+	if current_attack:
+		if current_attack["action"]:
+			call(current_attack["action"])
 
 func _ready():
 	walk_target = to_global(Vector3(0,0,0.1))#global_transform.origin

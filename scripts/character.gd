@@ -44,10 +44,11 @@ func _get_next_weapon():
 	
 func set_current_item(item):
 	print("Setting new item " + item.to_string())
-	var origin = current_item.transform.origin
-	item.transform.origin = origin
-	item.scale = Vector3(0.3,0.3,0.3)
-	$Head.remove_child(current_item)
+	if current_item:
+		var origin = current_item.transform.origin
+		item.transform.origin = origin
+		item.scale = Vector3(0.3,0.3,0.3)
+		$Head.remove_child(current_item)
 	current_item = item
 	$Head.add_child(current_item)
 	emit_signal("item_change", item.item_name)
@@ -101,7 +102,8 @@ func _physics_process(delta):
 		can_change_weapon = true
 
 	if Input.is_action_pressed("ui_shoot"):
-		current_item.use()
+		if current_item:
+			current_item.use()
 	
 	vspeed -= gravity * delta
 	######################################
